@@ -36,9 +36,10 @@ func (game *Game) Run() {
 		fmt.Println("You lose!")
 		return
 	}
+	fmt.Println("You chose to end your turn. Beginning dealer turn.")
+	time.Sleep(time.Millisecond*500)
 
 	for game.DealerPlaying {
-		time.Sleep(time.Millisecond*500)
 		game.DoDealerTurn()
 	}
 	if game.DealerScore() > 21 {
@@ -70,22 +71,27 @@ func (game *Game) DoPlayerTurn() {
 	} else {
 		game.PlayerPlaying = false
 	}
+	time.Sleep(time.Millisecond*500)
 }
 
 func (game *Game) DoDealerTurn() {
 	score := game.DealerScore()
 	fmt.Printf("Dealer score is %d.\n", score)
+	time.Sleep(time.Millisecond*500)
 	if score <= 17 { // hit
 		fmt.Println("Dealer has decided to hit.")
+		time.Sleep(time.Millisecond*500)
 		game.DealerCards = game.Deck.Hit(game.DealerCards)
 		score = game.DealerScore()
 		if score > 21 {
 			fmt.Println("Dealer busts! Their score was", score)
+			time.Sleep(time.Millisecond*500)
 			game.DealerPlaying = false
 			return
 		}
 	} else {
 		fmt.Println("Dealer has decided to stay. Dealer turn is over.")
+		time.Sleep(time.Millisecond*500)
 		game.DealerPlaying = false
 	}
 }

@@ -40,8 +40,8 @@ func (deck *Deck) Hit(hand []string) []string {
 	card, cards := gameutils.Pop(deck.cards)
 	deck.cards = cards
 	hand = append(hand, card)
-	fmt.Println("Card drawn: ", card)
-	fmt.Println("New hand: ", hand)
+	fmt.Println("    Card drawn: ", card)
+	fmt.Println("    New hand: ", hand)
 	return hand
 }
 
