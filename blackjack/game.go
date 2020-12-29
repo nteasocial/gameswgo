@@ -47,6 +47,10 @@ func (game *Game) Run() {
 		return
 	}
 
+	fmt.Printf("Game has ended. Final score:\n    Player: %d\n    Dealer: %d\n",
+		game.PlayerScore(), game.DealerScore())
+	time.Sleep(time.Millisecond*500)
+
 	switch game.Winner() {
 	case "player":
 		fmt.Println("You win!")
@@ -82,6 +86,7 @@ func (game *Game) DoDealerTurn() {
 		fmt.Println("Dealer has decided to hit.")
 		time.Sleep(time.Millisecond*500)
 		game.DealerCards = game.Deck.Hit(game.DealerCards)
+		time.Sleep(time.Millisecond*500)
 		score = game.DealerScore()
 		if score > 21 {
 			fmt.Println("Dealer busts! Their score was", score)
