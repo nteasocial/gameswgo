@@ -55,7 +55,9 @@ func Score(hand []string) int {
 		} else {
 			n, err := strconv.Atoi(hand[i])
 			// this shouldn't ever happen
-			if err != nil {panic(err)}
+			if err != nil {
+				panic(err)
+			}
 			score += n
 		}
 	}

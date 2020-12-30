@@ -8,20 +8,20 @@ import (
 )
 
 type Game struct {
-	PlayerCards []string
-	DealerCards []string
+	PlayerCards   []string
+	DealerCards   []string
 	PlayerPlaying bool
 	DealerPlaying bool
-	Deck *Deck
+	Deck          *Deck
 }
 
-func Blackjack() *Game {
+func New() *Game {
 	return &Game{
-		PlayerCards: []string{},
-		DealerCards: []string{},
+		PlayerCards:   []string{},
+		DealerCards:   []string{},
 		PlayerPlaying: true,
 		DealerPlaying: true,
-		Deck: NewDeck(),
+		Deck:          NewDeck(),
 	}
 }
 
@@ -33,31 +33,29 @@ func (game *Game) Run() {
 		game.DoPlayerTurn()
 	}
 	if game.PlayerScore() > 21 {
-		fmt.Println("You lose!")
+		gameutils.Print("You lose!")
 		return
 	}
-	fmt.Println("You chose to end your turn. Beginning dealer turn.")
-	time.Sleep(time.Millisecond*500)
+	gameutils.Print("You chose to end your turn. Beginning dealer turn.")
 
 	for game.DealerPlaying {
 		game.DoDealerTurn()
 	}
 	if game.DealerScore() > 21 {
-		fmt.Println("You win!")
+		gameutils.Print("You win!")
 		return
 	}
 
 	fmt.Printf("Game has ended. Final score:\n    Player: %d\n    Dealer: %d\n",
 		game.PlayerScore(), game.DealerScore())
-	time.Sleep(time.Millisecond*500)
 
 	switch game.Winner() {
 	case "player":
-		fmt.Println("You win!")
+		gameutils.Print("You win!")
 	case "dealer":
-		fmt.Println("Dealer wins!")
+		gameutils.Print("Dealer wins!")
 	default:
-		fmt.Println("Draw.")
+		gameutils.Print("Draw.")
 	}
 }
 
@@ -68,35 +66,29 @@ func (game *Game) DoPlayerTurn() {
 		game.PlayerCards = game.Deck.Hit(game.PlayerCards)
 		score = game.PlayerScore()
 		if score > 21 {
-			fmt.Println("Bust! Your score was", score)
+			gameutils.Print("Bust! Your score was %d.", score)
 			game.PlayerPlaying = false
 			return
 		}
 	} else {
 		game.PlayerPlaying = false
 	}
-	time.Sleep(time.Millisecond*500)
 }
 
 func (game *Game) DoDealerTurn() {
 	score := game.DealerScore()
-	fmt.Printf("Dealer score is %d.\n", score)
-	time.Sleep(time.Millisecond*500)
-	if score <= 17 { // hit
-		fmt.Println("Dealer has decided to hit.")
-		time.Sleep(time.Millisecond*500)
+	gameutils.Print("Dealer score is %d.", score)
+	if score <= 5 || (score < 21 && score <= game.PlayerScore()) { // hit
+		gameutils.Print("Dealer has decided to hit.")
 		game.DealerCards = game.Deck.Hit(game.DealerCards)
-		time.Sleep(time.Millisecond*500)
 		score = game.DealerScore()
 		if score > 21 {
-			fmt.Println("Dealer busts! Their score was", score)
-			time.Sleep(time.Millisecond*500)
+			gameutils.Print("Dealer busts! Their score was %d.", score)
 			game.DealerPlaying = false
 			return
 		}
 	} else {
-		fmt.Println("Dealer has decided to stay. Dealer turn is over.")
-		time.Sleep(time.Millisecond*500)
+		gameutils.Print("Dealer has decided to stay. Dealer turn is over.")
 		game.DealerPlaying = false
 	}
 }
