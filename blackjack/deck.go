@@ -63,7 +63,12 @@ func Score(hand []string) int {
 	}
 	// handle Aces
 	for j := 0; j < aces; j++ {
-		score += 1 // TODO: make ace count as 1 or 11
+		toCompare := 21 - (aces - 1)
+		if score+11 < toCompare {
+			score += 11
+		} else {
+			score += 1
+		}
 	}
 	return score
 }

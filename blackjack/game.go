@@ -78,7 +78,7 @@ func (game *Game) DoPlayerTurn() {
 func (game *Game) DoDealerTurn() {
 	score := game.DealerScore()
 	gameutils.Print("Dealer score is %d.", score)
-	if score <= 5 || (score < 21 && score <= game.PlayerScore()) { // hit
+	if score+11 <= 21 || (score < 21 && score <= game.PlayerScore()) { // hit
 		gameutils.Print("Dealer has decided to hit.")
 		game.DealerCards = game.Deck.Hit(game.DealerCards)
 		score = game.DealerScore()
