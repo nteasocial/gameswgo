@@ -3,22 +3,29 @@ package tic_tac_toe
 import "fmt"
 
 type Game struct {
-	Players map[string]Player
+	Players []Player
 	Board   *Board
 }
 
 func New(/*twoPlayer bool*/) *Game {
-	o := new(HumanPlayer)
-	x := new(HumanPlayer)
-
-	players := map[string]Player{
-		"X": x,
-		"O": o,
-	}
-
 	game := &Game{
-		Players: players,
+		Players: nil,
+		Board: nil,
 	}
+
+	o := &HumanPlayer{
+		GamePiece: 'o',
+		Game: nil,
+	}
+	x := &HumanPlayer{
+		GamePiece: 'x',
+		Game: nil,
+	}
+
+	players := []Player{x, o}
+	game.Players = players
+
+	game.Board = NewBoard()
 
 	return game
 }
