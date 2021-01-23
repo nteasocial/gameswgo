@@ -1,6 +1,7 @@
 package tic_tac_toe
 
 import (
+	"fmt"
 	"github.com/nwunderly/terminal-games/gameutils"
 	"strconv"
 	"strings"
@@ -21,12 +22,10 @@ func (p *HumanPlayer) Human() bool { return true }
 
 func (p *HumanPlayer) GetTurn() (int, int) {
 	input := gameutils.Input("Input move as two integers: ")
-	move := strings.Split(input, " ")
-	x, y := func(s []string) (int, int) {
-		a, _ := strconv.Atoi(s[0])
-		b, _ := strconv.Atoi(s[0])
-		return a, b
-	}(move)
+	move := strings.Fields(input)
+	x, _ := strconv.Atoi(move[0])
+	y, _ := strconv.Atoi(move[1])
+	fmt.Printf("REQUESTED POSITION: %d %d\n", x, y)
 	return x, y
 }
 
