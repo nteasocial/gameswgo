@@ -13,7 +13,7 @@ func Input(prompt string) string {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(prompt)
 	str, _ := reader.ReadString('\n')
-	return str[:len(str)-1]
+	return str[:len(str)-2]
 }
 
 func Bool(input string) bool {
