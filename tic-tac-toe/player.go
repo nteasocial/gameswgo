@@ -2,9 +2,10 @@ package tic_tac_toe
 
 import (
 	"fmt"
-	"github.com/nwunderly/terminal-games/gameutils"
 	"strconv"
 	"strings"
+
+	"github.com/nteasocial/gameswgo/gameutils"
 )
 
 type Player interface {

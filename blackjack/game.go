@@ -2,9 +2,10 @@ package blackjack
 
 import (
 	"fmt"
-	"github.com/nwunderly/terminal-games/gameutils"
 	"math/rand"
 	"time"
+
+	"github.com/nteasocial/gameswgo/gameutils"
 )
 
 type Game struct {

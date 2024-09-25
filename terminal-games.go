@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/nwunderly/terminal-games/blackjack"
-	"github.com/nwunderly/terminal-games/gameutils"
-	"github.com/nwunderly/terminal-games/tic-tac-toe"
+	"github.com/nteasocial/gameswgo/blackjack"
+	"github.com/nteasocial/gameswgo/gameutils"
+	"github.com/nteasocial/gameswgo/tic-tac-toe"
 	"os"
 )
 
